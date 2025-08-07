@@ -1,0 +1,35 @@
+name: Automate Data Preprocessing
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'Preprocessing/automate_Muhammad-Fahmi-Hutomo.py'
+      - '.github/workflows/main.yml'
+
+jobs:
+  preprocess:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12.7'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas numpy kagglehub
+
+    - name: Run Preprocessing
+      run: python preprocessing/automate_Muhammad-Fahmi-Hutomo.py
+
+    - name: Upload cleaned data as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: cleaned-data
+        path: preprocessing/data_clean/data_clean.csv
