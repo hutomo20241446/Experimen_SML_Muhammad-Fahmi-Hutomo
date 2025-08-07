@@ -28,8 +28,3 @@ jobs:
     - name: Run Preprocessing
       run: python preprocessing/automate_Muhammad-Fahmi-Hutomo.py
 
-    - name: Upload cleaned data as artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: cleaned-data
-        path: preprocessing/data_clean/data_clean.csv
